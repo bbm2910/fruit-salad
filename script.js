@@ -12,19 +12,29 @@ function extractFruit(e) {
   e.target[0].value = "";
 }
 
-function fetchFruitData(fruit) {
-  fetch(`https://fruit-api-5v0j.onrender.com/fruits/${fruit}`)
-    .then(processResponse)
-    .then((data) => addFruit(data))
-    .catch((err) => console.log(err));
-
-  fetch(
-    `https://pixabay.com/api/?key=49560481-dd50fb5b150dea4d442d11dba&q=${fruit}+fruit`
-  )
-    .then((respomse) => respomse.json())
-    .then((data) => console.log(data))
-    .catch((err) => console.log(err));
+async function fetchFruitData(fruit) {
+  try {
+    const response = await fetch(
+      `https://fruit-api-5v0j.onrender.com/fruits/${fruit}`
+    );
+    const data = await response.json();
+    addFruit(data);
+  } catch {}
 }
+
+// function fetchFruitData(fruit) {
+//   fetch(`https://fruit-api-5v0j.onrender.com/fruits/${fruit}`)
+//     .then(processResponse)
+//     .then((data) => addFruit(data))
+//     .catch((err) => console.log(err));
+
+//   fetch(
+//     `https://pixabay.com/api/?key=49560481-dd50fb5b150dea4d442d11dba&q=${fruit}+fruit`
+//   )
+//     .then((respomse) => respomse.json())
+//     .then((data) => console.log(data))
+//     .catch((err) => console.log(err));
+// }
 
 function processResponse(response) {
   if (response.ok) {

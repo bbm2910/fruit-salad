@@ -1,1 +1,2 @@
-- remove calorie info
+- remove calorie info when li is closed
+- render images instead of text
